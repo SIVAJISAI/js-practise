@@ -1,0 +1,18 @@
+const upto_which_no = 5;
+let firstNumber = 2;
+let primeFound=1;
+while(primeFound <=upto_which_no){
+    let counter = 0;
+    let div = 1;
+    while(div <= firstNumber){
+        if(firstNumber % div === 0){
+            counter = counter+1;
+        }
+        div = div +1
+    }
+    if(counter === 2){
+        primeFound += 1
+    }
+    firstNumber = firstNumber + 1;
+}
+console.log(firstNumber - 1,"is",upto_which_no);
