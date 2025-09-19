@@ -1,4 +1,4 @@
-const upto_which_no = 5;
+const which_no = 5;
 let firstNumber = 2;
 let primeFound=1;
 while(primeFound <=upto_which_no){
