@@ -15,4 +15,4 @@ while(primeFound <=whichNo){
     }
     firstNumber = firstNumber + 1;
 }
-console.log(firstNumber - 1,"is",whichNo);
+console.log(firstNumber - 1,"is",whichNo)
