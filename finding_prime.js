@@ -1,7 +1,7 @@
 const which_no = 5;
 let firstNumber = 2;
 let primeFound=1;
-while(primeFound <=upto_which_no){
+while(primeFound <=which_no){
     let counter = 0;
     let div = 1;
     while(div <= firstNumber){
@@ -15,4 +15,4 @@ while(primeFound <=upto_which_no){
     }
     firstNumber = firstNumber + 1;
 }
-console.log(firstNumber - 1,"is",upto_which_no);
+console.log(firstNumber - 1,"is",which_no);
