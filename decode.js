@@ -1,7 +1,17 @@
 function decode(data) {
-  const endIndex = data.indexOf('e', 0);
-  const number = Number(data.slice(1, endIndex));
-  return number;
+  let index = 0;
+  if (data[index] === 'i') {
+    const endIndex = data.indexOf('e', 0);
+    const number = Number(data.slice(1, endIndex));
+    return number;
+  }
+
+  if (data[index] <= '9' && data[index] >= '0') {
+    const colonIndex = data.indexOf(":", 0);
+    const text = data.slice(colonIndex + 1);
+    return text;
+  }
+  console.log("enter proper data");
 }
 
 function messageToPrint(description, data, result, expectedOutput) {
@@ -24,6 +34,8 @@ function testAll() {
   Testdecode("number 456", "i456e", 456);
   Testdecode("number 0", "i0e", 0);
   Testdecode("number 01", "i01e", 1);
+  Testdecode("normal string", "5:hello", "hello");
+  Testdecode("empty string", "0:", "");
 }
 
 testAll();
