@@ -9,7 +9,9 @@ function decode(data) {
   if (data[index] <= '9' && data[index] >= '0') {
     const colonIndex = data.indexOf(":", 0);
     const textLength = Number(data.slice(index, colonIndex));
-    const text = data.slice(colonIndex + 1, colonIndex + 1 + textLength);
+    const startIndex = colonIndex + 1;
+    const endIndex = startIndex + textLength;
+    const text = data.slice(startIndex, endIndex);
     return text;
   }
   console.log("enter proper data");
