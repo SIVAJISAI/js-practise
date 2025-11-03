@@ -23,6 +23,7 @@ function testAll() {
   Testdecode("number 123", "i123e", 123);
   Testdecode("number 456", "i456e", 456);
   Testdecode("number 0", "i0e", 0);
+  Testdecode("number 01", "i01e", 1);
 }
 
 testAll();
