@@ -2,11 +2,11 @@ function heading(text) {
   console.log(`\n${"-".repeat(20) + text + "-".repeat(20)}`);
 }
 
-function decodeNext(data) {
-  return decode(data, 0)[0];
+function decode(data) {
+  return decodeNext(data, 0)[0];
 }
 
-function decode(data, index) {
+function decodeNext(data, index) {
   if (data[index] === 'i') {
     const endIndex = data.indexOf('e', index);
     const number = Number(data.slice(index + 1, endIndex));
@@ -24,7 +24,7 @@ function decode(data, index) {
   const result = [];
   let currentIndex = index + 1;
   while (data[currentIndex] !== 'e') {
-    const [element, nextIndex] = decode(data, currentIndex);
+    const [element, nextIndex] = decodeNext(data, currentIndex);
     result.push(element);
     currentIndex = nextIndex;
   }
@@ -60,7 +60,7 @@ function messageToPrint(description, data, result, expectedOutput) {
 }
 
 function Testdecode(description, data, expectedOutput) {
-  const result = decodeNext(data, 0);
+  const result = decode(data, 0);
   console.log(messageToPrint(description, data, result, expectedOutput));
 }
 
@@ -83,15 +83,15 @@ function testString() {
 
 function testList() {
   heading("LIST");
-  Testdecode("normal list", "li6e5:helloe", [6, 'hello']);
   Testdecode("single element in list", "li3ee", [3]);
   Testdecode("nested list in list", "li3eli4eee", [3, [4]]);
-  Testdecode("normal array", "li3eli4ee5:helloe", [3, [4],"hello"]);
-  Testdecode("normal array", "li3eli4ee0:e", [3,[4],""]);
-  Testdecode("normal array", "l3:onel3:twol5:threeeee", ["one", ["two", ["three"]]]);
+  Testdecode("list with numbers and strings", "li3eli4ee5:helloe", [3, [4],"hello"]);
+  Testdecode("normal list", "l3:onel3:twol5:threeeee", ["one", ["two", ["three"]]]);
   Testdecode("empty list in list", "l0:i0elee", [ "", 0, [] ]);
   Testdecode("empty list", "le", []);
+  Testdecode("nested array", "l5:applei123el6:bananai-5eee", ["apple", 123, ["banana", -5]]);
 }
+
 function testAll() {
   testNumbers();
   testString();
