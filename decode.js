@@ -8,7 +8,8 @@ function decode(data) {
 
   if (data[index] <= '9' && data[index] >= '0') {
     const colonIndex = data.indexOf(":", 0);
-    const text = data.slice(colonIndex + 1);
+    const textLength = Number(data.slice(index, colonIndex));
+    const text = data.slice(colonIndex + 1, colonIndex + 1 + textLength);
     return text;
   }
   console.log("enter proper data");
@@ -34,7 +35,7 @@ function testAll() {
   Testdecode("number 456", "i456e", 456);
   Testdecode("number 0", "i0e", 0);
   Testdecode("number 01", "i01e", 1);
-  Testdecode("normal string", "5:hello", "hello");
+  Testdecode("normal string", "5:hello world", "hello");
   Testdecode("empty string", "0:", "");
 }
 
