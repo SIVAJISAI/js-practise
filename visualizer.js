@@ -39,14 +39,13 @@ function symbol(index, elementIndices) {
 function attachtiles(data, elementIndices = []) {
   console.clear();
   for (let index = 0; index < data.length; index++) {
-    let string = "";
-    for (let count = 0; count < data[index]; count++) {
-      string += symbol(index, elementIndices);
-    }
-    console.log(`${data[index]}: ${string}`);
+    const bar = symbol(index, elementIndices).repeat(data[index]);
+    const row = String(data[index]).padStart(3, " ") + ": " + bar;
+    console.log(row);
   }
 }
-function main(args) { 
+
+function main(args) {
   const noOfElements = args[0] || 8;
   const data = randomNumbers(noOfElements);
   console.log(data);
