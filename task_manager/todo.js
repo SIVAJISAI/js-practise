@@ -10,18 +10,22 @@ const loadTasks = () => {
   const tasks = [];
 
   for (const line of lines) {
+    if (!line.trim()) continue;
+
     const parts = line.split("|");
+
     tasks.push({
       id: Number(parts[0]),
       isDone: parts[1] === "1",
       text: parts.slice(2).join("|"),
     });
-  }
 
+  }
   return tasks;
 };
 
-const whichid = (tasks) =>
+
+const nextId = (tasks) =>
   tasks.length ? Math.max(...tasks.map((t) => t.id)) + 1 : 1;
 
 const saveTask = (tasks) => {
@@ -36,16 +40,17 @@ const add = (tasks, args) => {
   if (!text) {
     console.log("YOU MUST ENTER TEXT FOR ADD COMMAND");
   }
-  tasks.push({ id: whichid(tasks), isDone: false, text });
+  tasks.push({ id: nextId(tasks), isDone: false, text });
   saveTask(tasks);
   console.log("Added:", text);
 };
 
 const show = (tasks) => {
   if (tasks.length === 0) {
-    console.log("no tasks are there");
+    console.log("NO TASKS ARE THERE TO SHOW");
     return;
   }
+
   tasks.forEach((t, i) =>
     console.log(`${i + 1} ${t.isDone ? "✅" : "❌"} ${t.text}`)
   );
@@ -74,7 +79,7 @@ const done = (tasks, args) => {
 };
 
 const exit = () => {
-  console.log("ok work is done! bye");
+  console.log("\nok work is done! bye");
   Deno.exit(0);
 };
 
@@ -95,7 +100,7 @@ const help = () => {
   console.log("done <number>\n");
 };
 
-const commands = (input) => {
+const executeCommand = (input) => {
   const [command, args] = parseInput(input);
   const tasks = loadTasks();
 
@@ -111,5 +116,5 @@ const commands = (input) => {
 while (true) {
   const input = prompt("> ");
   if (input === null) break;
-  commands(input);
+  executeCommand(input);
 }
