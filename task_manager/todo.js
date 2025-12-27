@@ -3,6 +3,7 @@ const parseInput = (input) => {
   return [command, args];
 };
 
+//task loading
 const loadTasks = () => {
   const data = Deno.readTextFileSync("./tasks.txt");
   const lines = data.trim().split("\n");
@@ -35,6 +36,7 @@ const saveTask = (tasks) => {
   Deno.writeTextFileSync("tasks.txt", result);
 };
 
+//adding a task
 const add = (tasks, args) => {
   const text = args.join(" ");
   if (!text) {
@@ -45,6 +47,7 @@ const add = (tasks, args) => {
   console.log("Added:", text);
 };
 
+//showing all tasks
 const show = (tasks) => {
   if (tasks.length === 0) {
     console.log("NO TASKS ARE THERE TO SHOW");
@@ -56,6 +59,7 @@ const show = (tasks) => {
   );
 };
 
+//deleting tasks
 const remove = (tasks,args) => {
   const index = Number(args[0]) - 1;
   if (index < 0 || index >= tasks.length) {
@@ -67,6 +71,7 @@ const remove = (tasks,args) => {
   console.log("deleted:", removed.text);
 };
 
+//marking task as done
 const done = (tasks, args) => {
   const index = Number(args[0]) - 1;
   if (index < 0 || index >= tasks.length) {
@@ -78,6 +83,8 @@ const done = (tasks, args) => {
   console.log("Done:", tasks[index].text);
 };
 
+
+//exiting from task manager
 const exit = () => {
   console.log("\nok work is done! bye");
   Deno.exit(0);
@@ -91,6 +98,7 @@ const handleCommands = {
   exit,
 };
 
+//help-show all commands
 const help = () => {
   console.log("COMMANDS ARE:");
   console.log("add <text>");
@@ -99,6 +107,7 @@ const help = () => {
   console.log("exit");
   console.log("done <number>\n");
 };
+
 
 const executeCommand = (input) => {
   const [command, args] = parseInput(input);
